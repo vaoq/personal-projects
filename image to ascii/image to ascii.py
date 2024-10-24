@@ -28,15 +28,15 @@ def image_to_ascii_art(
     img_path: str, output_file: str, background_color_rgb: list[int], size: int
 ) -> str:
 
-    # load images
+    # load grayscale and rgb version of image
     grayscale = Image.open(img_path).convert("L")
     rgb = Image.open(img_path).convert("RGB")
 
-    # get array of pixel brightness and pixel colours
+    # get arrays of pixel brightness and pixel colour
     pixels = get_pixels(grayscale, size)
     colors = get_colors(rgb, size)
 
-    # get size for later
+    # get width for usage later
     image_width = rgb.size[0] // size
 
     # characters to use for the image
@@ -54,12 +54,6 @@ def image_to_ascii_art(
     # assign each pixel to a character
     new_pixels = [chars[(int(pixel/(255//len(chars)+1)))] for pixel in pixels]
 
-    text_output = ''.join(new_pixels)
-    ascii_image = [
-        text_output[index : index + image_width]
-        for index in range(0, len(text_output), image_width)
-    ]
-
     for i in range(len(new_pixels)):
         new_pixels[i] = f'\x1b[38;2;{colors[i][0]};{colors[i][1]};{colors[i][2]}m{new_pixels[i]}'
         if i % image_width == 0 and i!=0:
@@ -68,13 +62,6 @@ def image_to_ascii_art(
 
     screenshot = ImageGrab.grab(all_screens=True)
     screenshot.save('ss.png', 'PNG')  # Equivalent to `screenshot.save(filepath, format='PNG')`
-
-
-    ascii_image = "\n".join(ascii_image)
-
-    with open(f"{output_file}.txt", "w") as f:
-        f.write(ascii_image)
-        f.close()
 
     return ''
 
