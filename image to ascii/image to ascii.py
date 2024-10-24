@@ -47,12 +47,12 @@ def image_to_ascii_art(
             print('\033[1;31;49m')
         print(bg+new_pixels[i], end=new_pixels[i])
 
-    screenshot = ImageGrab.grab(all_screens=True)
-    screenshot.save('ss.png', 'PNG')
+    #screenshot = ImageGrab.grab(all_screens=True)
+    #screenshot.save('ss.png', 'PNG')
 
     return ''
 
-image_to_ascii_art("example3.jpg",     # Directory Path of image to convert
+image_to_ascii_art("images\\example3.jpg",     # Directory Path of image to convert
                    [0,0,0],      # RGB Value of background (Hint: Typically looks better with black background)
                    30,                    # Size of image (Hint: Higher value = Lower Resolution)
-                   '-3')              # Which set of characters to use in the 'chars' array.
+                   '-3')            # Which set of characters to use in the 'chars' array.
