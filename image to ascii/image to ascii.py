@@ -43,7 +43,7 @@ def image_to_ascii_art(
 
     return ascii_image + '\033[1;31;49m'
 
-print(image_to_ascii_art("images\\example2.png",     # Directory Path of image to convert
+print(image_to_ascii_art("images\\example6.png",     # Directory Path of image to convert
                    [0,0,0],      # RGB Value of background (Hint: Typically looks better with black background)
-                   4,                    # Size of image (Hint: Higher value = Lower Resolution)
-                   '-3'))          # Which set of characters to use in the 'chars' array.
+                   10,                    # Size of image (Hint: Higher value = Lower Resolution)
+                   '-3'))          # Which set of characters to use in the 'chars' array. Use negative to reverse which chars are used for bright/dark areas.
